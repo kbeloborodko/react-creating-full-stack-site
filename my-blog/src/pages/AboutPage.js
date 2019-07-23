@@ -1,8 +1,8 @@
 import React from 'react';
 
-const HomePage = () => (
+const AboutPage = () => (
   <>
-    <h1>Hello, welcome to my blog!</h1>
+    <h1>About me</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra maecenas accumsan lacus vel facilisis volutpat est velit. Pellentesque id nibh tortor id aliquet lectus proin nibh nisl. Aliquet nec ullamcorper sit amet risus nullam eget felis. Quis enim lobortis scelerisque fermentum. Non diam phasellus vestibulum lorem sed risus ultricies. Quis ipsum suspendisse ultrices gravida dictum. Blandit volutpat maecenas volutpat blandit aliquam etiam erat velit. Pellentesque id nibh tortor id aliquet. Lorem mollis aliquam ut porttitor leo a diam sollicitudin. Magna ac placerat vestibulum lectus mauris. In hac habitasse platea dictumst vestibulum. Non pulvinar neque laoreet suspendisse interdum. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Pretium viverra suspendisse potenti nullam ac.</p>
 
     <p>Lectus magna fringilla urna porttitor rhoncus dolor purus non enim. Mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. At lectus urna duis convallis convallis tellus. Nisi vitae suscipit tellus mauris a diam maecenas. Egestas dui id ornare arcu odio ut sem nulla. Justo donec enim diam vulputate ut pharetra sit amet aliquam. Risus nec feugiat in fermentum posuere. Massa tincidunt nunc pulvinar sapien et. Justo nec ultrices dui sapien eget mi proin sed libero. Nec tincidunt praesent semper feugiat nibh. Lobortis feugiat vivamus at augue eget arcu. Et sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque. Faucibus purus in massa tempor nec feugiat nisl pretium. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque. Habitant morbi tristique senectus et netus. Dui faucibus in ornare quam viverra orci sagittis eu. Cursus in hac habitasse platea dictumst quisque sagittis purus.</p>
@@ -15,4 +15,4 @@ const HomePage = () => (
   </>
 );
 
-export default HomePage;
+export default AboutPage;
