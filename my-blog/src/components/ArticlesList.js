@@ -1,12 +1,27 @@
 import React from 'react';
 import Article from './Article';
-import articleContent from '../pages/article-content';
 
-const articlesList = () => (
-  <>
-    {articleContent.map((article, key) => (
-      <Article key={key} article={article} />
+const gridLayout = itemsList => (
+  <div className="row">
+    {itemsList.map((item, key) => (
+      <div key="key" className="col">
+        <Article article={item} />
+      </div>
     ))}
+  </div>
+);
+
+const listLayout = itemsList => (
+  <>
+    {itemsList.map((item, key) => (
+      <Article key={key} article={item} />
+    ))}
+  </>
+);
+
+const articlesList = ({ articles, gridView }) => (
+  <>
+    {gridView ? gridLayout(articles) : listLayout(articles)}
   </>
 );
 

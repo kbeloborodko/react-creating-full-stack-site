@@ -1,10 +1,11 @@
 import React from 'react';
 import ArticlesList from '../components/ArticlesList';
+import articleContent from '../pages/article-content';
 
 const ArticlesListPage = () => (
   <>
     <h1 className="mb-3">Articles List</h1>
-    <ArticlesList />
+    <ArticlesList articles={articleContent} />
   </>
 );
 
