@@ -9,7 +9,7 @@ const ArticlePage = ({ match }) => {
   const relatedArticles = articleContent.filter(article => article.name !== name);
 
   if (!article) {
-    return (<NotFoundPage>);
+    return <NotFoundPage />;
   }
   return (
     <>
