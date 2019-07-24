@@ -3,13 +3,16 @@ import bodyParser from 'body-parser';
 
 const articlesInfo = {
   'learn-react': {
-    votes: 0
+    votes: 0,
+    comments: []
   },
   'learn-node': {
-    votes: 0
+    votes: 0,
+    comments: []
   },
   'my-thoughts-on-resumes': {
-    votes: 0
+    votes: 0,
+    comments: []
   }
 };
 
@@ -22,6 +25,15 @@ app.post('/api/articles/:name/vote', (req, res) => {
   articlesInfo[articleName].votes += 1;
 
   res.status(200).send(`${articleName} now has ${articlesInfo[articleName].votes} votes!`);
+});
+
+app.post('/api/articles/:name/comments', (req, res) => {
+  const { username, text } = req.body;
+  const articleName = req.params.name;
+
+  articlesInfo[articleName].comments.push({username, text});
+
+  res.status(200).send(articlesInfo[articleName]);
 });
 
 app.listen(8000, () => {
