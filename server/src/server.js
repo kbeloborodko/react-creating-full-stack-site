@@ -6,7 +6,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-const withDB = async (operations)  => {
+const withDB = async (operations, res)  => {
   try {
     const client = await MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true });
     const db = client.db('blog');
@@ -27,7 +27,7 @@ app.get('/api/articles/:name', async (req, res) => {
     const articleInfo = await db.collection('articles').findOne({ name: articleName });
 
     res.status(200).json(articleInfo);
-  });
+  }, res);
 });
 
 app.post('/api/articles/:name/votes', async (req, res) => {
@@ -43,16 +43,25 @@ app.post('/api/articles/:name/votes', async (req, res) => {
     const updatedArticleInfo = await db.collection('articles').findOne({ name: articleName });
 
     res.status(200).json(updatedArticleInfo);
-  });
+  }, res);
 });
 
 app.post('/api/articles/:name/comments', (req, res) => {
   const { username, text } = req.body;
   const articleName = req.params.name;
 
-  articlesInfo[articleName].comments.push({ username, text });
+  withDB(async (db) => {
+    const articleInfo = await db.collection('articles').findOne({ name: articleName });
 
-  res.status(200).send(articlesInfo[articleName]);
+    await db.collection('articles').updateOne({ name: articleName }, {
+      '$set': {
+        comments: [...articleInfo.comments, { username, text }]
+      }
+    });
+    const updatedArticleInfo = await db.collection('articles').findOne({ name: articleName });
+
+    res.status(200).send(updatedArticleInfo);
+  }, res);
 });
 
 app.listen(8000, () => {
