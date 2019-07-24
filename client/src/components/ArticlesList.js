@@ -4,8 +4,8 @@ import Article from './Article';
 const gridLayout = itemsList => (
   <div className="row">
     {itemsList.map((item, key) => (
-      <div key="key" className="col">
-        <Article article={item} />
+      <div key={key} className="col">
+        <Article article={item} gridView={true} />
       </div>
     ))}
   </div>
@@ -19,10 +19,10 @@ const listLayout = itemsList => (
   </>
 );
 
-const articlesList = ({ articles, gridView }) => (
+const ArticlesList = ({ articles, gridView }) => (
   <>
     {gridView ? gridLayout(articles) : listLayout(articles)}
   </>
 );
 
-export default articlesList;
+export default ArticlesList;
