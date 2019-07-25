@@ -23,7 +23,7 @@ class ArticlePage extends Component {
     }
   }
 
-  componentDidMount() {
+  fetchArticles = () => {
     const { name } = this.props.match.params;
 
     this.setState({ loading: true });
@@ -50,6 +50,16 @@ class ArticlePage extends Component {
         });
       })
       .catch(error => console.log(error));
+  }
+
+  componentDidMount() {
+    this.fetchArticles();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.name !== prevProps.match.params.name) {
+      this.fetchArticles();
+    }
   }
 
   render() {
