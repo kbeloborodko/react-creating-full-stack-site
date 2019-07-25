@@ -20,6 +20,17 @@ const withDB = async (operations, res)  => {
   }
 };
 
+app.get('/api/articles', async (req, res) => {
+  withDB(async (db) => {
+    db.collection('articles').find({}).toArray((error, articlesList) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(articlesList);
+    });
+  }, res);
+});
+
 app.get('/api/articles/:name', async (req, res) => {
   withDB(async (db) => {
     const articleName = req.params.name;
