@@ -9,8 +9,6 @@ const ArticlesListPage = () => {
       const result = await fetch('/api/articles');
       const body = await result.json();
 
-      console.log(body);
-
       setArticlesListData(body);
     };
 
