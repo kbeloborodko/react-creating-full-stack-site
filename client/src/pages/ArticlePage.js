@@ -5,6 +5,7 @@ import NotFoundPage from './NotFoundPage';
 import Loader from '../components/Loader';
 import CommentsList from '../components/CommentsList';
 import ArticlesList from '../components/ArticlesList';
+import VotesSection from '../components/VotesSection';
 
 class ArticlePage extends Component {
   constructor(props) {
@@ -12,14 +13,14 @@ class ArticlePage extends Component {
 
     this.state = {
       articleInfo: {
+        name: '',
         title: '',
         content: [],
         comments: [],
         relatedArticles: []
       },
       articleNotFound: false,
-      loading: false,
-      relatedArticles: []
+      loading: false
     }
   }
 
@@ -28,12 +29,11 @@ class ArticlePage extends Component {
 
     this.setState({ loading: true });
 
-    fetch(`/api/articles`)
+    fetch(`/api/articles/${name}`)
       .then(response => response.json())
-      .then(data => {
-        const articleInfo = data.filter(article => article.name === name);
+      .then(articleInfo => {
 
-        if (!articleInfo.length) {
+        if (!articleInfo) {
           this.setState({
             articleNotFound: true
           });
@@ -41,12 +41,9 @@ class ArticlePage extends Component {
           return;
         }
 
-        const relatedArticles = data.filter(article => article.name !== name);
-
         this.setState({
-          articleInfo: articleInfo[0],
-          loading: false,
-          relatedArticles,
+          articleInfo,
+          loading: false
         });
       })
       .catch(error => console.log(error));
@@ -76,13 +73,13 @@ class ArticlePage extends Component {
     return (
       <>
         <h1>{articleInfo.title}</h1>
-        <p>This post has been voted {articleInfo.votes} times.</p>
         {articleInfo.content.map((paragraph, key) => (
           <p key={key}>{paragraph}</p>
         ))}
+        <VotesSection votes={articleInfo.votes} />
         <CommentsList comments={articleInfo.comments} />
         <h2 className="h3">Related Articles</h2>
-        <ArticlesList articles={relatedArticles} gridView={true} />
+        {articleInfo.relatedArticles.length ? <ArticlesList articles={articleInfo.relatedArticles} gridView={true} /> : null}
       </>
     );
   }
