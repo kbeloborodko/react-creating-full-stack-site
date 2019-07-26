@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
-import NotFoundPage from './NotFoundPage';
-import Loader from '../components/Loader';
-import VotesSection from '../components/VotesSection';
-import CommentsList from '../components/CommentsList'
-import AddCommentForm from '../components/AddCommentForm';
-import ArticlesList from '../components/ArticlesList';
+import NotFoundPage from "./NotFoundPage";
+
+import Loader from "../components/Loader";
+import VotesSection from "../components/VotesSection";
+import CommentsList from "../components/CommentsList";
+import AddCommentForm from "../components/AddCommentForm";
+import ArticlesList from "../components/ArticlesList";
 
 class ArticlePage extends Component {
   constructor(props) {
@@ -14,8 +15,8 @@ class ArticlePage extends Component {
 
     this.state = {
       articleInfo: {
-        name: '',
-        title: '',
+        name: "",
+        title: "",
         votes: 0,
         content: [],
         comments: [],
@@ -23,7 +24,7 @@ class ArticlePage extends Component {
       },
       articleNotFound: false,
       loading: false
-    }
+    };
   }
 
   fetchArticles = () => {
@@ -34,7 +35,6 @@ class ArticlePage extends Component {
     fetch(`/api/articles/${name}`)
       .then(response => response.json())
       .then(articleInfo => {
-
         if (!articleInfo) {
           this.setState({
             articleNotFound: true
@@ -49,25 +49,25 @@ class ArticlePage extends Component {
         });
       })
       .catch(error => console.log(error));
-  }
+  };
 
-  updateVotes = (votes) => {
+  updateVotes = votes => {
     this.setState({
       articleInfo: {
         ...this.state.articleInfo,
         votes
       }
     });
-  }
+  };
 
-  updateCommentsList = (comments) => {
+  updateCommentsList = comments => {
     this.setState({
       articleInfo: {
         ...this.state.articleInfo,
         comments
       }
-    })
-  }
+    });
+  };
 
   componentDidMount() {
     this.fetchArticles();
@@ -80,7 +80,12 @@ class ArticlePage extends Component {
   }
 
   render() {
-    const { articleInfo, articleNotFound, loading, relatedArticles } = this.state;
+    const {
+      articleInfo,
+      articleNotFound,
+      loading,
+      relatedArticles
+    } = this.state;
 
     if (articleNotFound) {
       return <NotFoundPage />;
@@ -96,11 +101,23 @@ class ArticlePage extends Component {
         {articleInfo.content.map((paragraph, key) => (
           <p key={key}>{paragraph}</p>
         ))}
-        <VotesSection articleName={articleInfo.name} votes={articleInfo.votes} updateVotes={this.updateVotes} />
+        <VotesSection
+          articleName={articleInfo.name}
+          votes={articleInfo.votes}
+          updateVotes={this.updateVotes}
+        />
         <CommentsList comments={articleInfo.comments} />
-        <AddCommentForm articleName={articleInfo.name} updateCommentsList={this.updateCommentsList} />
+        <AddCommentForm
+          articleName={articleInfo.name}
+          updateCommentsList={this.updateCommentsList}
+        />
         <h2 className="h3">Related Articles</h2>
-        {articleInfo.relatedArticles.length ? <ArticlesList articles={articleInfo.relatedArticles} gridView={true} /> : null}
+        {articleInfo.relatedArticles.length ? (
+          <ArticlesList
+            articles={articleInfo.relatedArticles}
+            gridView={true}
+          />
+        ) : null}
       </>
     );
   }
