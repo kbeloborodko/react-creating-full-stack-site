@@ -80,12 +80,7 @@ class ArticlePage extends Component {
   }
 
   render() {
-    const {
-      articleInfo,
-      articleNotFound,
-      loading,
-      relatedArticles
-    } = this.state;
+    const { articleInfo, articleNotFound, loading } = this.state;
 
     if (articleNotFound) {
       return <NotFoundPage />;
