@@ -15,6 +15,7 @@ class ArticlePage extends Component {
       articleInfo: {
         name: '',
         title: '',
+        votes: 0,
         content: [],
         comments: [],
         relatedArticles: []
@@ -49,6 +50,15 @@ class ArticlePage extends Component {
       .catch(error => console.log(error));
   }
 
+  updateVotes = (votes) => {
+    this.setState({
+      articleInfo: {
+        ...this.state.articleInfo,
+        votes
+      }
+    });
+  }
+
   componentDidMount() {
     this.fetchArticles();
   }
@@ -76,7 +86,7 @@ class ArticlePage extends Component {
         {articleInfo.content.map((paragraph, key) => (
           <p key={key}>{paragraph}</p>
         ))}
-        <VotesSection votes={articleInfo.votes} />
+        <VotesSection articleName={articleInfo.name} votes={articleInfo.votes} updateVotes={this.updateVotes} />
         <CommentsList comments={articleInfo.comments} />
         <h2 className="h3">Related Articles</h2>
         {articleInfo.relatedArticles.length ? <ArticlesList articles={articleInfo.relatedArticles} gridView={true} /> : null}
