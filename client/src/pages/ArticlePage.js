@@ -3,9 +3,10 @@ import { withRouter } from 'react-router-dom';
 
 import NotFoundPage from './NotFoundPage';
 import Loader from '../components/Loader';
-import CommentsList from '../components/CommentsList';
-import ArticlesList from '../components/ArticlesList';
 import VotesSection from '../components/VotesSection';
+import CommentsList from '../components/CommentsList'
+import AddCommentForm from '../components/AddCommentForm';
+import ArticlesList from '../components/ArticlesList';
 
 class ArticlePage extends Component {
   constructor(props) {
@@ -59,6 +60,15 @@ class ArticlePage extends Component {
     });
   }
 
+  updateCommentsList = (comments) => {
+    this.setState({
+      articleInfo: {
+        ...this.state.articleInfo,
+        comments
+      }
+    })
+  }
+
   componentDidMount() {
     this.fetchArticles();
   }
@@ -88,6 +98,7 @@ class ArticlePage extends Component {
         ))}
         <VotesSection articleName={articleInfo.name} votes={articleInfo.votes} updateVotes={this.updateVotes} />
         <CommentsList comments={articleInfo.comments} />
+        <AddCommentForm articleName={articleInfo.name} updateCommentsList={this.updateCommentsList} />
         <h2 className="h3">Related Articles</h2>
         {articleInfo.relatedArticles.length ? <ArticlesList articles={articleInfo.relatedArticles} gridView={true} /> : null}
       </>
