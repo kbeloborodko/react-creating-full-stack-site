@@ -20,9 +20,7 @@ const listLayout = itemsList => (
 );
 
 const ArticlesList = ({ articles, gridView }) => (
-  <>
-    {gridView ? gridLayout(articles) : listLayout(articles)}
-  </>
+  <>{gridView ? gridLayout(articles) : listLayout(articles)}</>
 );
 
 export default ArticlesList;

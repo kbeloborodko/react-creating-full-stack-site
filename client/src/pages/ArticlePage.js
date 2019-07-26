@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-import NotFoundPage from "./NotFoundPage";
+import NotFoundPage from './NotFoundPage';
 
-import Loader from "../components/Loader";
-import VotesSection from "../components/VotesSection";
-import CommentsList from "../components/CommentsList";
-import AddCommentForm from "../components/AddCommentForm";
-import ArticlesList from "../components/ArticlesList";
+import Loader from '../components/Loader';
+import VotesSection from '../components/VotesSection';
+import CommentsList from '../components/CommentsList';
+import AddCommentForm from '../components/AddCommentForm';
+import ArticlesList from '../components/ArticlesList';
 
 class ArticlePage extends Component {
   constructor(props) {
@@ -15,15 +15,15 @@ class ArticlePage extends Component {
 
     this.state = {
       articleInfo: {
-        name: "",
-        title: "",
+        name: '',
+        title: '',
         votes: 0,
         content: [],
         comments: [],
-        relatedArticles: []
+        relatedArticles: [],
       },
       articleNotFound: false,
-      loading: false
+      loading: false,
     };
   }
 
@@ -37,7 +37,7 @@ class ArticlePage extends Component {
       .then(articleInfo => {
         if (!articleInfo) {
           this.setState({
-            articleNotFound: true
+            articleNotFound: true,
           });
 
           return;
@@ -45,7 +45,7 @@ class ArticlePage extends Component {
 
         this.setState({
           articleInfo,
-          loading: false
+          loading: false,
         });
       })
       .catch(error => console.log(error));
@@ -55,8 +55,8 @@ class ArticlePage extends Component {
     this.setState({
       articleInfo: {
         ...this.state.articleInfo,
-        votes
-      }
+        votes,
+      },
     });
   };
 
@@ -64,8 +64,8 @@ class ArticlePage extends Component {
     this.setState({
       articleInfo: {
         ...this.state.articleInfo,
-        comments
-      }
+        comments,
+      },
     });
   };
 

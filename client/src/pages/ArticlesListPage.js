@@ -20,7 +20,7 @@ const ArticlesListPage = () => {
       <h1 className="mb-3">Articles List</h1>
       <ArticlesList articles={articlesListInfo} />
     </>
-  )
+  );
 };
 
 export default ArticlesListPage;
